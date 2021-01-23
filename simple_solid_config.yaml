@@ -1,0 +1,6 @@
+solids:
+  simple_solid:
+    inputs:
+      name: "Daniel"
+    config:
+      param: True

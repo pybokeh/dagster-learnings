@@ -1,0 +1,6 @@
+solids:
+  solid_with_annotations:
+    inputs:
+      name: "Daniel"
+    config:
+      param: True
