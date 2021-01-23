@@ -3,7 +3,9 @@ from dagster import (
     pipeline,
     solid,
     AssetMaterialization,
+    Bool,
     EventMetadataEntry,
+    Field,
     InputDefinition,
     OutputDefinition,
     Output,
@@ -30,7 +32,9 @@ def simple_solid(context, name: str) -> None:
 # A solid example with more boilerplate code to add annotations or metadata to dagit
 @solid(
     description="A solid to exemplify boilderplate code when adding annotations",
-    config_schema={'param': bool},
+    config_schema={
+        'param': Field(Bool, is_required=False, default_value=True)
+    },
     input_defs=[
         InputDefinition(
             name="name",
