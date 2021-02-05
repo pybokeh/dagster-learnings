@@ -30,7 +30,7 @@ A repository is a collection of pipelines
 A pipeline is a collection of tasks (in dagster's world or terminology, a task is a "solid")
 
 #### Solid
-A solid is a task or Python function
+A solid is a task or Python function decorated with `@solid` decorator
 
 #### References
 workspace: https://docs.dagster.io/overview/repositories-workspaces/workspaces<br>
@@ -59,17 +59,21 @@ Another thing of note, generally, dagster expects solids to have input(s) and th
 
 ## What do I like about dagster?
 
-- It's facility to add annotations or metadata to the pipeline is extremely useful to get more "hands-on" with the data, which aids in debugging or testing the pipeline
+- It is a general purpose scheduler - therfore, can be used in a variety of use cases (automation, ETL, machine learning, etc)
+- You can develop locally and then deploy on cloud platform
+- Its facility to add annotations or metadata to the pipeline is extremely useful to get more "hands-on" with the data, which aids in debugging or testing the pipeline
 - It comes with an amazing web UI (dagit) with real-time tracking of your pipelines
 - Easily manage and organize multiple pipelines.  It is easy to execute pipelines specifically tailored for various groups or organizations due to the notion of workspace and repository aspects of dagster.
 - It fully works on Windows and no special admin privileges required
-- It comes with a native scheduler - no need to rely on Windows Task Scheduler or 'NIX OS cron.  You can even use cron syntax to define fine-grained scheduling intervals.
-- Event-based triggering via `sensors` and `hooks`
+- It comes with a native scheduler - no need to rely on Windows Task Scheduler or 'NIX OS cron.  You can even use cron syntax to define finely-grained scheduling intervals.
+- Event-based triggering via `sensors` and `hooks` (send a Slack or MS Teams notification when a pipeline fails or when a file is saved onto a network share drive)
 
 ## What do I not like about dagster?
 
 - There is a bit of boilerplate code, but which you can control for the most part
-- A bit opinionated in a few areas: you are forced to use dagster's data type for non-standard Python data types or data structures (ex. pandas dataframe)
+- A bit opinionated in a few areas: you are forced to use dagster's data type for non-standard Python data types or data structures (ex. you can't use pd.DataFrame, but have to use dagster's DataFrame type)
+- Unclear usage of `composite-solid`, but which will be removed in version 0.11.x
+- Documentation can be lacking for certain patterns or use cases.  For example, it is not immediately apparent how to re-execute pipeline at point of failure using the CLI or Python API.  Also, to be able to pass data between solids, you have to set IO manager to a persistent IO manager such as `fs_io_manager`, by definign mode definition within your `@solid` decorator.  This is a bit more boilerplate also.
 
 ## Can it be used for mission-critical pipelines?
 Maybe? It is a relatively young library (only 2 years old) and its API has only recently stabilized.  Version 0.10.0 is probably the best version to start using dagster.
