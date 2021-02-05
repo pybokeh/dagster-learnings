@@ -76,7 +76,7 @@ Another thing of note, generally, dagster expects solids to have input(s) and th
 - Documentation can be lacking for certain patterns or use cases.  For example, it is not immediately apparent how to re-execute pipeline at point of failure using the CLI or Python API.  Also, to be able to pass data between solids, you have to set IO manager to a persistent IO manager such as `fs_io_manager`, by definign mode definition within your `@solid` decorator.  This is a bit more boilerplate also.
 
 ## Can it be used for mission-critical pipelines?
-Maybe? It is a relatively young library (only 2 years old) and its API has only recently stabilized.  Version 0.10.0 is probably the best version to start using dagster.
+Maybe? It is a relatively young library (only 2 years old) and its API has only recently stabilized.  Version 0.10.0 is probably the best version to start using dagster. However, there will be a significant change with version 0.11.x as they are doing away with `composite-solid` and changing `@pipeline` to `@graph` per this [discussion](https://github.com/dagster-io/dagster/discussions/2902).
 
 ## Executing the example pipelines
 With dagster, you have a few different options to execute the example pipelines in this repo:
